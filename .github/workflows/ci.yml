@@ -57,6 +57,10 @@ jobs:
           composer require phpstan/phpstan-symfony
           ./vendor/bin/phpstan analyse src --memory-limit 1G
 
+      # Change permission
+      - name: Give permission on ./bin/console
+        run: chmod +x bin/console
+        
       # Linters Symfony
       - name: Lint YAML files
         run: ./bin/console lint:yaml config --parse-tags
