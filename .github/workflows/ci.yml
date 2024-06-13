@@ -16,6 +16,19 @@ jobs:
         with:
           extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, pdo
           
+      # Cache artifacts like dependencies and build outputs to improve workflow execution time
+      - name: Cache multiple paths
+        uses: actions/cache@v4.0.2
+        with:
+          # A list of files, directories, and wildcard patterns to cache and restore
+          path: |
+            vendor
+          # An explicit key for restoring and saving the cache
+          key: ${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          
+      - name: "Composer install"
+        run: composer install --no-interaction --no-progress   
+          
       # Runs a single command using the runners shell
       - name: LS
         run: ls
