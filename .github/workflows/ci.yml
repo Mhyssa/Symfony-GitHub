@@ -33,8 +33,11 @@ jobs:
       - name: Symfony CLI
         run: |
           curl -sS https://get.symfony.com/cli/installer | bash
-          mv /home/runner/.symfony/bin/symfony /usr/local/bin/symfony
-          
+          mv ~/.symfony*/bin/symfony /usr/local/bin/symfony
+
+      - name: Check Symfony version
+        run: symfony -v
+      
       # Check vulnerabilities
       - name: Symfony Check Vulnerabilities
         run: symfony check:security
